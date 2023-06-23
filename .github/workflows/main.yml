@@ -1,0 +1,64 @@
+name: Build Executable
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x" # Replace with your desired Python version
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build executable (Linux)
+        run: |
+          pyinstaller --onefile server.py
+
+      - name: Archive Linux artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-executable
+          path: dist/server
+
+      - name: Setup Python (macOS)
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+          architecture: "universal2" # Use 'x64' or 'universal2' for macOS
+
+      - name: Build executable (macOS)
+        run: |
+          pyinstaller --onefile server.py
+
+      - name: Archive macOS artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: macos-executable
+          path: dist/server
+
+      - name: Setup Python (Windows)
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+          architecture: "x64" # Use 'x64' for Windows
+
+      - name: Build executable (Windows)
+        run: |
+          pyinstaller --onefile server.py
+
+      - name: Archive Windows artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: windows-executable
+          path: dist/server.exe
