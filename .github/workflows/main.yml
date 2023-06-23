@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.x" # Replace with your desired Python version
+          python-version: "3.11" # Replace with your desired Python version
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -34,7 +34,7 @@ jobs:
       - name: Setup Python (macOS)
         uses: actions/setup-python@v2
         with:
-          python-version: "3.x"
+          python-version: "3.11"
           architecture: "universal2" # Use 'x64' or 'universal2' for macOS
 
       - name: Build executable (macOS)
@@ -50,7 +50,7 @@ jobs:
       - name: Setup Python (Windows)
         uses: actions/setup-python@v2
         with:
-          python-version: "3.x"
+          python-version: "3.11"
           architecture: "x64" # Use 'x64' for Windows
 
       - name: Build executable (Windows)
