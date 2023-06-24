@@ -1,9 +1,8 @@
 name: Build Executable
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [created]
 
 jobs:
   build:
@@ -11,7 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: [3.9]
+        python-version: [3.11]
         macos-architecture: [universal2] # Added macos-architecture field
     steps:
       - uses: actions/checkout@v3
